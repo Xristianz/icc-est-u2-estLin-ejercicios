@@ -15,7 +15,15 @@ public class LogicaClasificacion {
      *         Salida: "odnuM aloH"
      */
     public String invertirCadena(String texto) {
-        return "";
+        Stack<Character> pila = new Stack<>();
+        for (int i=0; i<texto.length();i++){
+            pila.push(texto.charAt(i));
+        }
+        StringBuilder invertir = new StringBuilder();
+        while(!pila.isEmpty()){
+            invertir.append(pila.pop());
+        }
+        return invertir.toString();
     }
 
     /**
@@ -30,6 +38,23 @@ public class LogicaClasificacion {
      *         Salida: true
      */
     public boolean validarSimbolos(String expresion) {
+        Stack<Character> pila = new Stack<>();
+        for(int i=0; i<expresion.length(); i++){
+            char c = expresion.charAt(i);
+            if(c=='['|| c=='{' || c=='('){
+                pila.push(c);
+            }else{
+                if(pila.isEmpty()) return false;
+                char cabeza = (char) pila.pop();
+                if((c=='}' && cabeza=='{')||
+                    (c==')' && cabeza=='(')||
+                    (c==']' && cabeza=='[')){
+                    return true;
+
+                }
+            }
+            
+        }
         return false;
     }
 
@@ -43,6 +68,15 @@ public class LogicaClasificacion {
      *         Salida: [1, 2, 3, 4]
      */
     public List<Integer> ordenarPila(Stack<Integer> pila) {
+        // Stack<Integer> pilaAux = new Stack<>();
+        // while(!pila.isEmpty()){
+        //     int aux = pila.pop();
+        //     while(pilaAux.peek()>aux){
+        //         pila.push(pilaAux.pop());
+
+        //     }
+        //     pilaAux.push(aux);
+        // }
 
         return new ArrayList<>();
     }
@@ -58,7 +92,18 @@ public class LogicaClasificacion {
      *         Salida: [2, 4, 6, 1, 3, 5]
      */
     public List<Integer> clasificarPorParidad(LinkedList<Integer> original) {
+        List<Integer> fin = new  LinkedList<>();
+        for(int numero : original){
+            if(numero%2==0){
+                fin.add(numero);
+            }
+        }
+        for(int numero: original){
+            if(numero%2!=0){
+                fin.add(numero);
+            }
+        }
 
-        return new ArrayList<>();
+        return new ArrayList<>(fin);
     }
 }
